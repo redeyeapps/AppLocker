@@ -9,11 +9,9 @@
 import UIKit
 import AudioToolbox
 import LocalAuthentication
-import Valet
 
 public enum ALConstants {
     static let nibName = "AppLocker"
-    static let kPincode = "pincode" // Key for saving pincode to keychain
     static let kLocalizedReason = "Unlock with sensor" // Your message when sensors must be shown
     static let duration = 0.3 // Duration of indicator filling
     static let maxPinLength = 4
@@ -24,11 +22,12 @@ public enum ALConstants {
     }
 }
 
-public typealias onSuccessfulDismissCallback = (_ mode: ALMode?) -> () // Cancel dismiss will send mode as nil
+public typealias onSuccessfulDismissCallback = (_ mode: ALMode?, _ pin: String?) -> () // Cancel dismiss will send mode as nil
 public typealias onFailedAttemptCallback = (_ mode: ALMode) -> ()
 public struct ALOptions { // The structure used to display the controller
     public var title: String?
     public var subtitle: String?
+    public var backgroundImage: UIImage?
     public var image: UIImage?
     public var color: UIColor?
     public var isSensorsEnabled: Bool?
@@ -38,37 +37,39 @@ public struct ALOptions { // The structure used to display the controller
 }
 
 public enum ALMode { // Modes for AppLocker
-    case validate
-    case change
-    case deactive
+    case validate(String?)
     case create
 }
 
 public class AppLocker: UIViewController {
     
     // MARK: - Top view
+    @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var submessageLabel: UILabel!
     @IBOutlet var pinIndicators: [Indicator]!
     @IBOutlet weak var cancelButton: UIButton!
     
-    static let valet = Valet.valet(with: Identifier(nonEmpty: "Druidia")!, accessibility: .whenUnlockedThisDeviceOnly)
     // MARK: - Pincode
     private var onSuccessfulDismiss: onSuccessfulDismissCallback?
     private var onFailedAttempt: onFailedAttemptCallback?
     private let context = LAContext()
     private var pin = "" // Entered pincode
     private var reservedPin = "" // Reserve pincode for confirm
+    private var validatingPin: String? // Provided pincode for validation
     private var isFirstCreationStep = true
-    private var savedPin: String? {
-        get {
-            return AppLocker.valet.string(forKey: ALConstants.kPincode)
-        }
-        set {
-            guard let newValue = newValue else { return }
-            AppLocker.valet.set(string: newValue, forKey: ALConstants.kPincode)
-        }
+    
+    override open var shouldAutorotate: Bool {
+        return false
+    }
+
+    override open var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
+        return .portrait
+    }
+
+    override open var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
     }
     
     public override func viewDidLoad() {
@@ -77,19 +78,14 @@ public class AppLocker: UIViewController {
         modalPresentationStyle = .fullScreen
     }
     
-    fileprivate var mode: ALMode = .validate {
+    fileprivate var mode: ALMode = .validate(nil) {
         didSet {
             switch mode {
-            case .create:
-                submessageLabel.text = "Create your passcode" // Your submessage for create mode
-            case .change:
-                submessageLabel.text = "Enter your passcode" // Your submessage for change mode
-            case .deactive:
-                submessageLabel.text = "Enter your passcode" // Your submessage for deactive mode
-            case .validate:
-                submessageLabel.text = "Enter your passcode" // Your submessage for validate mode
+            case .validate(let pin):
+                validatingPin = pin
                 cancelButton.isHidden = true
                 isFirstCreationStep = false
+            default: break
             }
         }
     }
@@ -118,10 +114,6 @@ public class AppLocker: UIViewController {
                 switch mode {
                 case .create:
                     createModeAction()
-                case .change:
-                    changeModeAction()
-                case .deactive:
-                    deactiveModeAction()
                 case .validate:
                     validateModeAction()
                 }
@@ -141,28 +133,10 @@ public class AppLocker: UIViewController {
         }
     }
     
-    private func changeModeAction() {
-        if pin == savedPin {
-            precreateSettings()
-        } else {
-            onFailedAttempt?(mode)
-            incorrectPinAnimation()
-        }
-    }
-    
-    private func deactiveModeAction() {
-        if pin == savedPin {
-            removePin()
-        } else {
-            onFailedAttempt?(mode)
-            incorrectPinAnimation()
-        }
-    }
-    
     private func validateModeAction() {
-        if pin == savedPin {
+        if pin == validatingPin {
             dismiss(animated: true) {
-                self.onSuccessfulDismiss?(self.mode)
+                self.onSuccessfulDismiss?(self.mode, self.pin)
             }
         } else {
             onFailedAttempt?(mode)
@@ -170,18 +144,10 @@ public class AppLocker: UIViewController {
         }
     }
     
-    private func removePin() {
-        AppLocker.valet.removeObject(forKey: ALConstants.kPincode)
-        dismiss(animated: true) {
-            self.onSuccessfulDismiss?(self.mode)
-        }
-    }
-    
     private func confirmPin() {
         if pin == reservedPin {
-            savedPin = pin
             dismiss(animated: true) {
-                self.onSuccessfulDismiss?(self.mode)
+                self.onSuccessfulDismiss?(self.mode, self.pin)
             }
         } else {
             onFailedAttempt?(mode)
@@ -229,7 +195,7 @@ public class AppLocker: UIViewController {
                 DispatchQueue.main.async { [weak self] in
                     guard let `self` = self else { return }
                     self.dismiss(animated: true) {
-                        self.onSuccessfulDismiss?(self.mode)
+                        self.onSuccessfulDismiss?(self.mode, nil)
                     }
                 }
             }
@@ -244,7 +210,7 @@ public class AppLocker: UIViewController {
         case ALConstants.button.cancel.rawValue:
             clearView()
             dismiss(animated: true) {
-                self.onSuccessfulDismiss?(nil)
+                self.onSuccessfulDismiss?(nil, nil)
             }
         default:
             drawing(isNeedClear: false, tag: sender.tag)
@@ -286,6 +252,13 @@ public extension AppLocker {
         } else {
             locker.photoImageView.isHidden = true
         }
+        
+        if let backgroundImage = config?.backgroundImage {
+            locker.backgroundImageView.image = backgroundImage
+        } else {
+            locker.backgroundImageView.isHidden = true
+        }
+        
         root.present(locker, animated: true, completion: nil)
     }
 }

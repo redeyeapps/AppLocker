@@ -13,6 +13,9 @@ class Indicator: UIView {
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         drawCircle(rect)
+        
+        layer.cornerRadius = rect.width / 2
+        layer.masksToBounds = true
     }
 }
 

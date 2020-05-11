@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -20,6 +18,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eVB-QY-Nnl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O4o-Ks-4Ii">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="222.5"/>
                         <subviews>
@@ -327,9 +328,13 @@
                 <constraints>
                     <constraint firstItem="O4o-Ks-4Ii" firstAttribute="height" secondItem="IOf-8m-rm3" secondAttribute="height" multiplier="1:3" id="3Jd-vS-1Uy"/>
                     <constraint firstAttribute="trailing" secondItem="xRu-9U-A1v" secondAttribute="trailing" id="7Gx-rG-Z33"/>
+                    <constraint firstAttribute="trailing" secondItem="eVB-QY-Nnl" secondAttribute="trailing" id="DSU-35-DWJ"/>
                     <constraint firstItem="xRu-9U-A1v" firstAttribute="leading" secondItem="IOf-8m-rm3" secondAttribute="leading" id="JGX-ya-vx1"/>
+                    <constraint firstItem="eVB-QY-Nnl" firstAttribute="leading" secondItem="IOf-8m-rm3" secondAttribute="leading" id="JyZ-Pk-4ai"/>
                     <constraint firstItem="O4o-Ks-4Ii" firstAttribute="top" secondItem="IOf-8m-rm3" secondAttribute="top" id="P6m-eY-Usf"/>
                     <constraint firstAttribute="bottom" secondItem="xRu-9U-A1v" secondAttribute="bottom" id="gKj-fb-OZp"/>
+                    <constraint firstItem="eVB-QY-Nnl" firstAttribute="top" secondItem="IOf-8m-rm3" secondAttribute="top" id="iK2-YE-DtF"/>
+                    <constraint firstAttribute="bottom" secondItem="eVB-QY-Nnl" secondAttribute="bottom" id="j9v-Xs-UPo"/>
                     <constraint firstItem="xRu-9U-A1v" firstAttribute="top" secondItem="O4o-Ks-4Ii" secondAttribute="bottom" id="jWl-Y0-LxV"/>
                     <constraint firstItem="hVx-18-l1J" firstAttribute="width" secondItem="IOf-8m-rm3" secondAttribute="width" multiplier="1:4.25" id="sNw-8Z-NlU"/>
                     <constraint firstAttribute="trailing" secondItem="O4o-Ks-4Ii" secondAttribute="trailing" id="xJg-Dp-gkv"/>
@@ -337,6 +342,7 @@
                 </constraints>
             </view>
             <connections>
+                <outlet property="backgroundImageView" destination="eVB-QY-Nnl" id="r7C-An-PEe"/>
                 <outlet property="cancelButton" destination="CIU-9Q-OSg" id="jph-Ge-Qt9"/>
                 <outlet property="messageLabel" destination="BiA-iv-5oK" id="fdo-bX-80h"/>
                 <outlet property="photoImageView" destination="hVx-18-l1J" id="gSk-Zu-Xoe"/>
