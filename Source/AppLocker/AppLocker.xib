@@ -109,10 +109,10 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xRu-9U-A1v" userLabel="keyboard">
-                        <rect key="frame" x="0.0" y="222.5" width="375" height="444.5"/>
+                        <rect key="frame" x="-35" y="222.5" width="445" height="444.5"/>
                         <subviews>
                             <button opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uxb-3y-6MP" customClass="PinIndicator" customModule="PasscodeLock" customModuleProvider="target">
-                                <rect key="frame" x="55" y="40" width="75" height="75"/>
+                                <rect key="frame" x="69" y="12.5" width="89" height="88.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <state key="normal" title="1">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -125,7 +125,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HJZ-BT-9eb" customClass="PinIndicator" customModule="PasscodeLock" customModuleProvider="target">
-                                <rect key="frame" x="150" y="40" width="75" height="75"/>
+                                <rect key="frame" x="178" y="12.5" width="89" height="88.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="HJZ-BT-9eb" secondAttribute="height" multiplier="1:1" id="1VR-Td-HwG"/>
                                 </constraints>
@@ -141,7 +141,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cog-Nd-UYd" customClass="PinIndicator" customModule="PasscodeLock" customModuleProvider="target">
-                                <rect key="frame" x="245" y="40" width="75" height="75"/>
+                                <rect key="frame" x="287" y="12.5" width="89" height="88.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <state key="normal" title="3">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -154,7 +154,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UJn-a6-MYe" customClass="PinIndicator" customModule="PasscodeLock" customModuleProvider="target">
-                                <rect key="frame" x="55" y="131" width="75" height="75"/>
+                                <rect key="frame" x="69" y="117" width="89" height="89"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <state key="normal" title="4">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -167,7 +167,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" clipsSubviews="YES" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sva-ss-Jmv" customClass="PinIndicator" customModule="PasscodeLock" customModuleProvider="target">
-                                <rect key="frame" x="150" y="131" width="75" height="75"/>
+                                <rect key="frame" x="178" y="117" width="89" height="89"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <state key="normal" title="5">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -180,7 +180,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" clipsSubviews="YES" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uve-ti-7ya" customClass="PinIndicator" customModule="PasscodeLock" customModuleProvider="target">
-                                <rect key="frame" x="245" y="131" width="75" height="75"/>
+                                <rect key="frame" x="287" y="117" width="89" height="89"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <state key="normal" title="6">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -193,7 +193,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" clipsSubviews="YES" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rAE-1L-zxN" customClass="PinIndicator" customModule="PasscodeLock" customModuleProvider="target">
-                                <rect key="frame" x="55" y="222" width="75" height="75"/>
+                                <rect key="frame" x="69" y="222" width="89" height="89"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <state key="normal" title="7">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -206,7 +206,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" clipsSubviews="YES" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="abq-s3-wbI" customClass="PinIndicator" customModule="PasscodeLock" customModuleProvider="target">
-                                <rect key="frame" x="150" y="222" width="75" height="75"/>
+                                <rect key="frame" x="178" y="222" width="89" height="89"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <state key="normal" title="8">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -219,7 +219,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" clipsSubviews="YES" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cKD-qE-N40" customClass="PinIndicator" customModule="PasscodeLock" customModuleProvider="target">
-                                <rect key="frame" x="245" y="222" width="75" height="75"/>
+                                <rect key="frame" x="287" y="222" width="89" height="89"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <state key="normal" title="9">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -232,7 +232,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" clipsSubviews="YES" tag="1000" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fEL-KO-vKM">
-                                <rect key="frame" x="245" y="313" width="75" height="75"/>
+                                <rect key="frame" x="287" y="327" width="89" height="89"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Delete">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -245,7 +245,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hQB-bP-FZg" customClass="PinIndicator" customModule="PasscodeLock" customModuleProvider="target">
-                                <rect key="frame" x="150" y="313" width="75" height="75"/>
+                                <rect key="frame" x="178" y="327" width="89" height="89"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <state key="normal" title="0">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -258,7 +258,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" clipsSubviews="YES" tag="1001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CIU-9Q-OSg">
-                                <rect key="frame" x="55" y="313" width="75" height="75"/>
+                                <rect key="frame" x="69" y="327" width="89" height="89"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Cancel">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -309,6 +309,7 @@
                             <constraint firstItem="uve-ti-7ya" firstAttribute="width" secondItem="cog-Nd-UYd" secondAttribute="width" id="eyS-xj-M1r"/>
                             <constraint firstItem="fEL-KO-vKM" firstAttribute="centerY" secondItem="hQB-bP-FZg" secondAttribute="centerY" id="fcb-YW-Tja"/>
                             <constraint firstItem="UJn-a6-MYe" firstAttribute="height" secondItem="uxb-3y-6MP" secondAttribute="height" id="hmB-Oy-yXn"/>
+                            <constraint firstAttribute="width" secondItem="xRu-9U-A1v" secondAttribute="height" multiplier="1:1" id="lRD-YE-33N"/>
                             <constraint firstItem="sva-ss-Jmv" firstAttribute="height" secondItem="HJZ-BT-9eb" secondAttribute="height" id="nXX-W2-9i9"/>
                             <constraint firstItem="rAE-1L-zxN" firstAttribute="top" secondItem="UJn-a6-MYe" secondAttribute="bottom" constant="16" id="oIc-Ce-PaD"/>
                             <constraint firstItem="sva-ss-Jmv" firstAttribute="centerX" secondItem="xRu-9U-A1v" secondAttribute="centerX" id="pKA-SV-hqQ"/>
@@ -327,15 +328,14 @@
                 <color key="backgroundColor" red="0.0" green="0.31202955104956603" blue="0.64690361550711661" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstItem="O4o-Ks-4Ii" firstAttribute="height" secondItem="IOf-8m-rm3" secondAttribute="height" multiplier="1:3" id="3Jd-vS-1Uy"/>
-                    <constraint firstAttribute="trailing" secondItem="xRu-9U-A1v" secondAttribute="trailing" id="7Gx-rG-Z33"/>
                     <constraint firstAttribute="trailing" secondItem="eVB-QY-Nnl" secondAttribute="trailing" id="DSU-35-DWJ"/>
-                    <constraint firstItem="xRu-9U-A1v" firstAttribute="leading" secondItem="IOf-8m-rm3" secondAttribute="leading" id="JGX-ya-vx1"/>
                     <constraint firstItem="eVB-QY-Nnl" firstAttribute="leading" secondItem="IOf-8m-rm3" secondAttribute="leading" id="JyZ-Pk-4ai"/>
                     <constraint firstItem="O4o-Ks-4Ii" firstAttribute="top" secondItem="IOf-8m-rm3" secondAttribute="top" id="P6m-eY-Usf"/>
                     <constraint firstAttribute="bottom" secondItem="xRu-9U-A1v" secondAttribute="bottom" id="gKj-fb-OZp"/>
                     <constraint firstItem="eVB-QY-Nnl" firstAttribute="top" secondItem="IOf-8m-rm3" secondAttribute="top" id="iK2-YE-DtF"/>
                     <constraint firstAttribute="bottom" secondItem="eVB-QY-Nnl" secondAttribute="bottom" id="j9v-Xs-UPo"/>
                     <constraint firstItem="xRu-9U-A1v" firstAttribute="top" secondItem="O4o-Ks-4Ii" secondAttribute="bottom" id="jWl-Y0-LxV"/>
+                    <constraint firstItem="xRu-9U-A1v" firstAttribute="centerX" secondItem="IOf-8m-rm3" secondAttribute="centerX" id="lDB-fr-YBF"/>
                     <constraint firstItem="hVx-18-l1J" firstAttribute="width" secondItem="IOf-8m-rm3" secondAttribute="width" multiplier="1:4.25" id="sNw-8Z-NlU"/>
                     <constraint firstAttribute="trailing" secondItem="O4o-Ks-4Ii" secondAttribute="trailing" id="xJg-Dp-gkv"/>
                     <constraint firstItem="O4o-Ks-4Ii" firstAttribute="leading" secondItem="IOf-8m-rm3" secondAttribute="leading" id="xNr-xt-esq"/>

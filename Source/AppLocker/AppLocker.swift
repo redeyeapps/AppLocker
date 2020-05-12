@@ -60,18 +60,6 @@ public class AppLocker: UIViewController {
     private var validatingPin: String? // Provided pincode for validation
     private var isFirstCreationStep = true
     
-    override open var shouldAutorotate: Bool {
-        return false
-    }
-
-    override open var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
-        return .portrait
-    }
-
-    override open var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .portrait
-    }
-    
     public override func viewDidLoad() {
         super.viewDidLoad()
         // https://stackoverflow.com/questions/56459329/disable-the-interactive-dismissal-of-presented-view-controller-in-ios-13
