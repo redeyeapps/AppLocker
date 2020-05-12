@@ -85,12 +85,15 @@ public class AppLocker: UIViewController {
                 validatingPin = pin
                 cancelButton.isHidden = true
                 isFirstCreationStep = false
-            default: break
+            case .create:
+                cancelButton.isHidden = true
+                isFirstCreationStep = true
+                submessageLabel.text = ""
             }
         }
     }
     
-    private func precreateSettings () { // Precreate settings for change mode
+    private func precreateSettings () {
         mode = .create
         clearView()
     }
@@ -152,6 +155,7 @@ public class AppLocker: UIViewController {
         } else {
             onFailedAttempt?(mode)
             incorrectPinAnimation()
+            precreateSettings()
         }
     }
     
