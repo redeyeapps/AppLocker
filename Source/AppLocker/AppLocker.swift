@@ -16,14 +16,14 @@ public enum ALConstants {
     static let duration = 0.3 // Duration of indicator filling
     static let maxPinLength = 4
     
-    enum button: Int {
+    enum Button: Int {
         case delete = 1000
         case cancel = 1001
     }
 }
 
-public typealias onSuccessfulDismissCallback = (_ mode: ALMode?, _ pin: String?) -> () // Cancel dismiss will send mode as nil
-public typealias onFailedAttemptCallback = (_ mode: ALMode) -> ()
+public typealias OnSuccessfulDismissCallback = (_ mode: ALMode?, _ pin: String?) -> () // Cancel dismiss will send mode as nil
+public typealias OnFailedAttemptCallback = (_ mode: ALMode) -> ()
 public struct ALOptions { // The structure used to display the controller
     public var title: String?
     public var subtitle: String?
@@ -31,13 +31,13 @@ public struct ALOptions { // The structure used to display the controller
     public var image: UIImage?
     public var color: UIColor?
     public var isSensorsEnabled: Bool?
-    public var onSuccessfulDismiss: onSuccessfulDismissCallback?
-    public var onFailedAttempt: onFailedAttemptCallback?
+    public var onSuccessfulDismiss: OnSuccessfulDismissCallback?
+    public var onFailedAttempt: OnFailedAttemptCallback?
     public init() {}
 }
 
 public enum ALMode { // Modes for AppLocker
-    case validate(String?)
+    case validate(String, Int)
     case create
 }
 
@@ -52,12 +52,14 @@ public class AppLocker: UIViewController {
     @IBOutlet weak var cancelButton: UIButton!
     
     // MARK: - Pincode
-    private var onSuccessfulDismiss: onSuccessfulDismissCallback?
-    private var onFailedAttempt: onFailedAttemptCallback?
+    private var onSuccessfulDismiss: OnSuccessfulDismissCallback?
+    private var onFailedAttempt: OnFailedAttemptCallback?
     private let context = LAContext()
     private var pin = "" // Entered pincode
+    private var pinAttempts = 0 // Number of wrong pincode attempts
     private var reservedPin = "" // Reserve pincode for confirm
-    private var validatingPin: String? // Provided pincode for validation
+    private var validatingPin = "" // Provided pincode for validation
+    private var validatingMaxAttempts = 0 // Provided remaining atempts for validation
     private var isFirstCreationStep = true
     
     public override func viewDidLoad() {
@@ -66,11 +68,12 @@ public class AppLocker: UIViewController {
         modalPresentationStyle = .fullScreen
     }
     
-    fileprivate var mode: ALMode = .validate(nil) {
+    fileprivate var mode: ALMode = .validate("", 0) {
         didSet {
             switch mode {
-            case .validate(let pin):
+            case .validate(let pin, let maxAttempts):
                 validatingPin = pin
+                validatingMaxAttempts = maxAttempts
                 cancelButton.isHidden = true
                 isFirstCreationStep = false
             case .create:
@@ -118,30 +121,31 @@ public class AppLocker: UIViewController {
             isFirstCreationStep = false
             reservedPin = pin
             clearView()
-            submessageLabel.text = "Confirm your pincode"
+            submessageLabel.text = NSLocalizedString("Confirm PIN", comment: "Confirm pin subtitle")
         } else {
             confirmPin()
         }
     }
     
     private func validateModeAction() {
-        if pin == validatingPin {
-            dismiss(animated: true) {
-                self.onSuccessfulDismiss?(self.mode, self.pin)
-            }
+        if pinAttempts < validatingMaxAttempts && pin == validatingPin {
+            onSuccessfulDismiss?(mode, pin)
+            dismiss(animated: false)
         } else {
+            pinAttempts += 1
             onFailedAttempt?(mode)
+            submessageLabel.text = NSLocalizedString("Wrong PIN. Try again", comment: "Wrong pin subtitle")
             incorrectPinAnimation()
         }
     }
     
     private func confirmPin() {
         if pin == reservedPin {
-            dismiss(animated: true) {
-                self.onSuccessfulDismiss?(self.mode, self.pin)
-            }
+            onSuccessfulDismiss?(mode, pin)
+            dismiss(animated: false)
         } else {
             onFailedAttempt?(mode)
+            submessageLabel.text = NSLocalizedString("PINs didn't match. Try again", comment: "PINs didn't match subtitle")
             incorrectPinAnimation()
             precreateSettings()
         }
@@ -185,10 +189,9 @@ public class AppLocker: UIViewController {
         context.evaluatePolicy(policy, localizedReason: ALConstants.kLocalizedReason, reply: {  success, error in
             if success {
                 DispatchQueue.main.async { [weak self] in
-                    guard let `self` = self else { return }
-                    self.dismiss(animated: true) {
-                        self.onSuccessfulDismiss?(self.mode, nil)
-                    }
+                    guard let self = self else { return }
+                    self.onSuccessfulDismiss?(self.mode, nil)
+                    self.dismiss(animated: false)
                 }
             }
         })
@@ -197,13 +200,12 @@ public class AppLocker: UIViewController {
     // MARK: - Keyboard
     @IBAction func keyboardPressed(_ sender: UIButton) {
         switch sender.tag {
-        case ALConstants.button.delete.rawValue:
+        case ALConstants.Button.delete.rawValue:
             drawing(isNeedClear: true)
-        case ALConstants.button.cancel.rawValue:
+        case ALConstants.Button.cancel.rawValue:
             clearView()
-            dismiss(animated: true) {
-                self.onSuccessfulDismiss?(nil, nil)
-            }
+            onSuccessfulDismiss?(nil, nil)
+            dismiss(animated: false)
         default:
             drawing(isNeedClear: false, tag: sender.tag)
         }
