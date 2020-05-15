@@ -260,7 +260,7 @@
                             <button opaque="NO" clipsSubviews="YES" tag="1001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CIU-9Q-OSg">
                                 <rect key="frame" x="69" y="327" width="89" height="89"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="Cancel">
+                                <state key="normal" title="Forgot PIN">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted">
@@ -324,6 +324,23 @@
                             <constraint firstItem="abq-s3-wbI" firstAttribute="height" secondItem="sva-ss-Jmv" secondAttribute="height" id="zaU-Xb-Hb6"/>
                         </constraints>
                     </view>
+                    <button opaque="NO" clipsSubviews="YES" tag="1002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ja8-HJ-fZz">
+                        <rect key="frame" x="16" y="0.0" width="89" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="Uhl-V2-EMl"/>
+                            <constraint firstAttribute="width" constant="89" id="hlx-Zo-NLK"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <state key="normal" title="Cancel">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <state key="highlighted">
+                            <color key="titleColor" red="0.66812671800000001" green="0.79767667949999999" blue="0.2358612618" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="keyboardPressed:" destination="eZb-O9-KwV" eventType="touchUpInside" id="xjP-Y4-X6j"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" red="0.0" green="0.31202955104956603" blue="0.64690361550711661" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
@@ -336,14 +353,17 @@
                     <constraint firstAttribute="bottom" secondItem="eVB-QY-Nnl" secondAttribute="bottom" id="j9v-Xs-UPo"/>
                     <constraint firstItem="xRu-9U-A1v" firstAttribute="top" secondItem="O4o-Ks-4Ii" secondAttribute="bottom" id="jWl-Y0-LxV"/>
                     <constraint firstItem="xRu-9U-A1v" firstAttribute="centerX" secondItem="IOf-8m-rm3" secondAttribute="centerX" id="lDB-fr-YBF"/>
+                    <constraint firstItem="Ja8-HJ-fZz" firstAttribute="leading" secondItem="IOf-8m-rm3" secondAttribute="leadingMargin" id="qo9-Sx-zqn"/>
                     <constraint firstItem="hVx-18-l1J" firstAttribute="width" secondItem="IOf-8m-rm3" secondAttribute="width" multiplier="1:4.25" id="sNw-8Z-NlU"/>
+                    <constraint firstItem="Ja8-HJ-fZz" firstAttribute="top" secondItem="1Nd-Cx-bNb" secondAttribute="bottom" id="tEy-Ls-IGh"/>
                     <constraint firstAttribute="trailing" secondItem="O4o-Ks-4Ii" secondAttribute="trailing" id="xJg-Dp-gkv"/>
                     <constraint firstItem="O4o-Ks-4Ii" firstAttribute="leading" secondItem="IOf-8m-rm3" secondAttribute="leading" id="xNr-xt-esq"/>
                 </constraints>
             </view>
             <connections>
                 <outlet property="backgroundImageView" destination="eVB-QY-Nnl" id="r7C-An-PEe"/>
-                <outlet property="cancelButton" destination="CIU-9Q-OSg" id="jph-Ge-Qt9"/>
+                <outlet property="cancelButton" destination="Ja8-HJ-fZz" id="HpV-k1-ZdO"/>
+                <outlet property="forgotPinButton" destination="CIU-9Q-OSg" id="Veu-iL-cfN"/>
                 <outlet property="messageLabel" destination="BiA-iv-5oK" id="fdo-bX-80h"/>
                 <outlet property="photoImageView" destination="hVx-18-l1J" id="gSk-Zu-Xoe"/>
                 <outlet property="submessageLabel" destination="9Yc-zm-CFr" id="7n3-e4-K6m"/>

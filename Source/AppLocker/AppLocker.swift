@@ -18,12 +18,15 @@ public enum ALConstants {
     
     enum Button: Int {
         case delete = 1000
-        case cancel = 1001
+        case forgot = 1001
+        case cancel = 1002
     }
 }
 
-public typealias OnSuccessfulDismissCallback = (_ mode: ALMode?, _ pin: String?) -> () // Cancel dismiss will send mode as nil
-public typealias OnFailedAttemptCallback = (_ mode: ALMode) -> ()
+public typealias OnSuccessfulDismissCallback = (_ mode: ALMode?, _ pin: String?) -> Void // Cancel dismiss will send mode as nil
+public typealias OnFailedAttemptCallback = (_ mode: ALMode) -> Void
+public typealias OnForgotPinCallback = (_ mode: ALMode) -> Void
+
 public struct ALOptions { // The structure used to display the controller
     public var title: String?
     public var subtitle: String?
@@ -33,6 +36,7 @@ public struct ALOptions { // The structure used to display the controller
     public var isSensorsEnabled: Bool?
     public var onSuccessfulDismiss: OnSuccessfulDismissCallback?
     public var onFailedAttempt: OnFailedAttemptCallback?
+    public var onForgotPin: OnForgotPinCallback?
     public init() {}
 }
 
@@ -50,10 +54,12 @@ public class AppLocker: UIViewController {
     @IBOutlet weak var submessageLabel: UILabel!
     @IBOutlet var pinIndicators: [Indicator]!
     @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var forgotPinButton: UIButton!
     
     // MARK: - Pincode
     private var onSuccessfulDismiss: OnSuccessfulDismissCallback?
     private var onFailedAttempt: OnFailedAttemptCallback?
+    private var onForgotPin: OnForgotPinCallback?
     private let context = LAContext()
     private var pin = "" // Entered pincode
     private var pinAttempts = 0 // Number of wrong pincode attempts
@@ -78,6 +84,7 @@ public class AppLocker: UIViewController {
                 isFirstCreationStep = false
             case .create:
                 cancelButton.isHidden = true
+                forgotPinButton.isHidden = true
                 isFirstCreationStep = true
                 submessageLabel.text = ""
             }
@@ -202,10 +209,15 @@ public class AppLocker: UIViewController {
         switch sender.tag {
         case ALConstants.Button.delete.rawValue:
             drawing(isNeedClear: true)
+            
+        case ALConstants.Button.forgot.rawValue:
+            onForgotPin?(mode)
+            
         case ALConstants.Button.cancel.rawValue:
             clearView()
             onSuccessfulDismiss?(nil, nil)
             dismiss(animated: false)
+            
         default:
             drawing(isNeedClear: false, tag: sender.tag)
         }
@@ -236,6 +248,7 @@ public extension AppLocker {
         locker.mode = mode
         locker.onSuccessfulDismiss = config?.onSuccessfulDismiss
         locker.onFailedAttempt = config?.onFailedAttempt
+        locker.onForgotPin = config?.onForgotPin
         
         if config?.isSensorsEnabled ?? false {
             locker.checkSensors()
