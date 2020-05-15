@@ -33,6 +33,7 @@ public struct ALOptions { // The structure used to display the controller
     public var backgroundImage: UIImage?
     public var image: UIImage?
     public var color: UIColor?
+    public var isCancelable: Bool?
     public var isSensorsEnabled: Bool?
     public var onSuccessfulDismiss: OnSuccessfulDismissCallback?
     public var onFailedAttempt: OnFailedAttemptCallback?
@@ -80,10 +81,8 @@ public class AppLocker: UIViewController {
             case .validate(let pin, let maxAttempts):
                 validatingPin = pin
                 validatingMaxAttempts = maxAttempts
-                cancelButton.isHidden = true
                 isFirstCreationStep = false
             case .create:
-                cancelButton.isHidden = true
                 forgotPinButton.isHidden = true
                 isFirstCreationStep = true
                 submessageLabel.text = ""
@@ -249,6 +248,9 @@ public extension AppLocker {
         locker.onSuccessfulDismiss = config?.onSuccessfulDismiss
         locker.onFailedAttempt = config?.onFailedAttempt
         locker.onForgotPin = config?.onForgotPin
+        
+        let isCancelable = config?.isCancelable ?? false
+        locker.cancelButton.isHidden = !isCancelable
         
         if config?.isSensorsEnabled ?? false {
             locker.checkSensors()
